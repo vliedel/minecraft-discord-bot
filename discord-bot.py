@@ -127,7 +127,10 @@ while True:
 		logging.debug(f"players: {match.group(1)} {match.group(2)} {match.group(3)}")
 		player_count = match.group(1)
 		max_player_count = match.group(2)
-		players = match.group(3).split(',')
+		players = match.group(3)
+
 		players_online.clear()
-		for p in players:
-			players_online.add(p.strip())
+		if len(players):
+			players = players.split(',')
+			for p in players:
+				players_online.add(p.strip())
