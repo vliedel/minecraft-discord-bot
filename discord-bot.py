@@ -184,3 +184,11 @@ while True:
 			for p in players:
 				players_online.add(p.strip())
 		logging.debug(f"online: {players_online}")
+
+	words = line.split(' ')
+	for p in players_online:
+		if words[0] == p:
+			logging.debug(f"death message: {line}")
+			send_discord_msg(line)
+			break
+
