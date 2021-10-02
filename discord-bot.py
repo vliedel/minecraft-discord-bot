@@ -185,13 +185,14 @@ while True:
 				players_online.add(p.strip())
 		logging.debug(f"online: {players_online}")
 
-	words = line.split(' ')
-	for p in players_online:
-		if words[0] == p:
-			logging.debug(f"death message??: {line}")
-			for r in regexes_death_message:
-				if r.match(line):
-					send_discord_msg(line)
-					break
-			break
+	split = line.split(' ', 1)
+	if len(split) == 2:
+		for p in players_online:
+			if split[0] == p:
+				logging.debug(f"death message??: {line}")
+				for r in regexes_death_message:
+					if r.match(split[1]):
+						send_discord_msg(line)
+						break
+				break
 
