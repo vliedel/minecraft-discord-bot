@@ -95,7 +95,12 @@ def get_player_names() -> str:
 	return player_names[0:-2]
 
 def get_online_msg() -> str:
-	return f"[{len(players_online)} / {max_player_count}] Online: {get_player_names()}"
+	msg = f"[{len(players_online)} / {max_player_count}] online"
+	if len(players):
+		return f"{msg}: {get_player_names()}"
+	else:
+		return msg
+
 
 while True:
 	line = f.stdout.readline().decode('utf-8')
@@ -124,13 +129,14 @@ while True:
 
 	match = regex_player_count.match(line)
 	if match:
-		logging.debug(f"players: {match.group(1)} {match.group(2)} {match.group(3)}")
+		logging.debug(f"players: count={match.group(1)} max={match.group(2)} players={match.group(3)}.")
 		player_count = match.group(1)
 		max_player_count = match.group(2)
-		players = match.group(3)
+		players = match.group(3).strip()
 
 		players_online.clear()
 		if len(players):
 			players = players.split(',')
 			for p in players:
 				players_online.add(p.strip())
+		logging.debug(f"online: {players_online}")
