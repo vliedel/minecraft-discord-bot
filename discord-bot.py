@@ -128,7 +128,7 @@ def get_player_names() -> str:
 
 def get_online_msg() -> str:
 	msg = f"[{len(players_online)} / {max_player_count}] online"
-	if len(players):
+	if len(players_online):
 		return f"{msg}: {get_player_names()}"
 	else:
 		return msg
