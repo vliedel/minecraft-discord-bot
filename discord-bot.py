@@ -62,10 +62,11 @@ regex_player_count = re.compile("There are (\d+) of a max of (\d+) players onlin
 # [05:44:02] [Server thread/INFO]: Starting minecraft server version 1.17.1
 # [05:44:07] [Server thread/INFO]: Time elapsed: 4380 ms
 # [05:44:07] [Server thread/INFO]: Done (4.511s)! For help, type "help"
+regex_server_start = re.compile("Starting minecraft server version .*")
 
 # [05:35:21] [Server thread/INFO]: Stopping the server
 # [05:35:21] [Server thread/INFO]: Stopping server
-
+regex_server_stop = re.compile("Stopping the server")
 
 
 
@@ -112,6 +113,18 @@ while True:
 
 	line = match.group(1)
 	logging.debug(f"line: {line}")
+
+
+	match = regex_server_start.match(line)
+	if match:
+		send_discord_msg(line)
+		players_online.clear()
+
+	match = regex_server_stop.match(line)
+	if match:
+		send_discord_msg(line)
+		players_online.clear()
+
 
 	match = regex_joined.match(line)
 	if match:
