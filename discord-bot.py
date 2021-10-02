@@ -76,35 +76,35 @@ regex_server_stop = re.compile("Stopping the server")
 # [00:04:44] [Server thread/INFO]: 4poc was slain by Piglin
 # See https://minecraft-archive.fandom.com/wiki/Death_Message
 regexes_death_message = []
-regexes_death_message.append("was shot by .*")
-regexes_death_message.append("was pummeled by .*")
-regexes_death_message.append("was pricked to death")
-regexes_death_message.append("walked into a cactus whilst trying to escape .*")
+regexes_death_message.append(re.compile("was shot by .*"))
+regexes_death_message.append(re.compile("was pummeled by .*"))
+regexes_death_message.append(re.compile("was pricked to death"))
+regexes_death_message.append(re.compile("walked into a cactus whilst trying to escape .*"))
 # Drowning
-regexes_death_message.append("drowned.*")
+regexes_death_message.append(re.compile("drowned.*"))
 # Elytra
-regexes_death_message.append("experienced kinetic energy.*")
+regexes_death_message.append(re.compile("experienced kinetic energy.*"))
 # Explosions
-regexes_death_message.append("blew up")
-regexes_death_message.append("was blown up by .*")
-regexes_death_message.append("was killed by.*")
+regexes_death_message.append(re.compile("blew up"))
+regexes_death_message.append(re.compile("was blown up by .*"))
+regexes_death_message.append(re.compile("was killed by.*"))
 # Falling
-regexes_death_message.append("hit the ground too hard.*")
-regexes_death_message.append("fell.*")
-regexes_death_message.append("was impaled on .*")
+regexes_death_message.append(re.compile("hit the ground too hard.*"))
+regexes_death_message.append(re.compile("fell.*"))
+regexes_death_message.append(re.compile("was impaled on .*"))
 # Falling blocks
-regexes_death_message.append("was squashed by .*")
+regexes_death_message.append(re.compile("was squashed by .*"))
 # Fire
-regexes_death_message.append("went up in flames")
-regexes_death_message.append("walked into fire.*")
-regexes_death_message.append("burned to death")
-regexes_death_message.append("was burnt to a crisp.*")
+regexes_death_message.append(re.compile("went up in flames"))
+regexes_death_message.append(re.compile("walked into fire.*"))
+regexes_death_message.append(re.compile("burned to death"))
+regexes_death_message.append(re.compile("was burnt to a crisp.*"))
 # Firework rockets
-regexes_death_message.append("went off with a bang.*")
+regexes_death_message.append(re.compile("went off with a bang.*"))
 # Lava
-regexes_death_message.append("tried to swim in lava.*")
+regexes_death_message.append(re.compile("tried to swim in lava.*"))
 # Lightning
-regexes_death_message.append("was struck by lightning.*")
+regexes_death_message.append(re.compile("was struck by lightning.*"))
 # Magma block
 
 
@@ -188,7 +188,10 @@ while True:
 	words = line.split(' ')
 	for p in players_online:
 		if words[0] == p:
-			logging.debug(f"death message: {line}")
-			send_discord_msg(line)
+			logging.debug(f"death message??: {line}")
+			for r in regexes_death_message:
+				if r.match(line):
+					send_discord_msg(line)
+					break
 			break
 
