@@ -74,7 +74,38 @@ regex_server_stop = re.compile("Stopping the server")
 # [00:02:43] [Server thread/INFO]: 4poc fell from a high place
 # [00:03:29] [Server thread/INFO]: 4poc fell from a high place
 # [00:04:44] [Server thread/INFO]: 4poc was slain by Piglin
-
+# See https://minecraft-archive.fandom.com/wiki/Death_Message
+regexes_death_message = []
+regexes_death_message.append("was shot by .*")
+regexes_death_message.append("was pummeled by .*")
+regexes_death_message.append("was pricked to death")
+regexes_death_message.append("walked into a cactus whilst trying to escape .*")
+# Drowning
+regexes_death_message.append("drowned.*")
+# Elytra
+regexes_death_message.append("experienced kinetic energy.*")
+# Explosions
+regexes_death_message.append("blew up")
+regexes_death_message.append("was blown up by .*")
+regexes_death_message.append("was killed by.*")
+# Falling
+regexes_death_message.append("hit the ground too hard.*")
+regexes_death_message.append("fell.*")
+regexes_death_message.append("was impaled on .*")
+# Falling blocks
+regexes_death_message.append("was squashed by .*")
+# Fire
+regexes_death_message.append("went up in flames")
+regexes_death_message.append("walked into fire.*")
+regexes_death_message.append("burned to death")
+regexes_death_message.append("was burnt to a crisp.*")
+# Firework rockets
+regexes_death_message.append("went off with a bang.*")
+# Lava
+regexes_death_message.append("tried to swim in lava.*")
+# Lightning
+regexes_death_message.append("was struck by lightning.*")
+# Magma block
 
 
 ########## Main ##########
