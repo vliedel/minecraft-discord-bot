@@ -76,8 +76,11 @@ regex_server_stop = re.compile("Stopping the server")
 # [00:04:44] [Server thread/INFO]: 4poc was slain by Piglin
 # See https://minecraft-archive.fandom.com/wiki/Death_Message
 regexes_death_message = []
+# Arrows
 regexes_death_message.append(re.compile("was shot by .*"))
+# Snowballs
 regexes_death_message.append(re.compile("was pummeled by .*"))
+# Cactus
 regexes_death_message.append(re.compile("was pricked to death"))
 regexes_death_message.append(re.compile("walked into a cactus whilst trying to escape .*"))
 # Drowning
@@ -106,6 +109,35 @@ regexes_death_message.append(re.compile("tried to swim in lava.*"))
 # Lightning
 regexes_death_message.append(re.compile("was struck by lightning.*"))
 # Magma block
+regexes_death_message.append(re.compile("discovered the floor was lava"))
+regexes_death_message.append(re.compile("walked into danger zone due to .*"))
+# Magic
+regexes_death_message.append(re.compile("was killed by .*"))
+# Powder snow
+regexes_death_message.append(re.compile("froze to death.*"))
+# Players and mobs
+regexes_death_message.append(re.compile("was slain by .*"))
+regexes_death_message.append(re.compile("was fireballed by .*"))
+regexes_death_message.append(re.compile("was stung to death"))
+regexes_death_message.append(re.compile("was shot by a skull from .*"))
+# Starving
+regexes_death_message.append(re.compile("starved to death.*"))
+# Suffocation
+regexes_death_message.append(re.compile("suffocated in a wall.*"))
+regexes_death_message.append(re.compile("was squished too much"))
+regexes_death_message.append(re.compile("was squashed by .*"))
+# Sweet Berry Bushes
+regexes_death_message.append(re.compile("was poked to death by a sweet berry bush.*"))
+# Thorns enchantment
+regexes_death_message.append(re.compile("was killed (by .*)? trying to hurt .*"))
+# Trident
+regexes_death_message.append(re.compile("was impaled by .*"))
+# Void
+regexes_death_message.append(re.compile("fell out of the world"))
+regexes_death_message.append(re.compile("didn't want to live in the same world as .*"))
+# Wither effect
+regexes_death_message.append(re.compile("withered away.*"))
+
 
 
 ########## Main ##########
@@ -189,10 +221,13 @@ while True:
 	if len(split) == 2:
 		for p in players_online:
 			if split[0] == p:
-				logging.debug(f"death message??: {line}")
+				found = False
 				for r in regexes_death_message:
 					if r.match(split[1]):
 						send_discord_msg(line)
+						found = True
 						break
+				if not found:
+					logging.debug(f"death message?? {line}")
 				break
 
