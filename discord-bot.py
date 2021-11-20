@@ -68,7 +68,8 @@ regex_server_start = re.compile("Starting minecraft server version .*")
 # [05:35:21] [Server thread/INFO]: Stopping server
 regex_server_stop = re.compile("Stopping the server")
 
-
+# [20:13:54] [Server thread/INFO]: hysterina has made the advancement [Local Brewery]
+regex_achievement = re.compile("has made the advancement .*")
 
 # [11:19:10] [Server thread/INFO]: 4poc was slain by Zombie
 # [00:02:43] [Server thread/INFO]: 4poc fell from a high place
@@ -221,13 +222,25 @@ while True:
 	if len(split) == 2:
 		for p in players_online:
 			if split[0] == p:
+				line_after_player = split[1]
+
+				# Check for achievement.
+				match = regex_achievement.match(line_after_player)
+				if match:
+					send_discord_msg(line)
+					break
+
+				# Check for death messages.
 				found = False
 				for r in regexes_death_message:
-					if r.match(split[1]):
+					if r.match(line_after_player):
 						send_discord_msg(line)
 						found = True
+						# Death msg was found, break the loop.
 						break
 				if not found:
 					logging.debug(f"death message?? {line}")
+
+				# Player was found, break the loop.
 				break
 
