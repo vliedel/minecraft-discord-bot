@@ -71,6 +71,10 @@ regex_server_stop = re.compile("Stopping the server")
 # [20:13:54] [Server thread/INFO]: hysterina has made the advancement [Local Brewery]
 regex_achievement = re.compile("has made the advancement .*")
 
+# [14:28:01] [Server thread/INFO]: <vliedel> hello there
+regex_chat = re.compile("<(.*)> (.*)")
+
+
 # [11:19:10] [Server thread/INFO]: 4poc was slain by Zombie
 # [00:02:43] [Server thread/INFO]: 4poc fell from a high place
 # [00:03:29] [Server thread/INFO]: 4poc fell from a high place
@@ -217,6 +221,16 @@ while True:
 			for p in players:
 				players_online.add(p.strip())
 		logging.debug(f"online: {players_online}")
+
+	match = regex_chat.match(line) # re.compile("<(.*)> (.*)")
+	if match:
+		for p in players_online:
+			if match.group(1) == p:
+				split = match.group(2).split(' ', 1)
+				command = split[0]
+				chat_text = split[1]
+				if command == "@d" or command == "@discord":
+					send_discord_msg(p + ": " + chat_text)
 
 	split = line.split(' ', 1)
 	if len(split) == 2:
