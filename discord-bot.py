@@ -79,7 +79,7 @@ regex_chat = re.compile("<(.*)> (.*)")
 # [00:02:43] [Server thread/INFO]: 4poc fell from a high place
 # [00:03:29] [Server thread/INFO]: 4poc fell from a high place
 # [00:04:44] [Server thread/INFO]: 4poc was slain by Piglin
-# See https://minecraft-archive.fandom.com/wiki/Death_Message
+# See https://minecraft.fandom.com/wiki/Death_messages
 regexes_death_message = []
 # Arrows
 regexes_death_message.append(re.compile("was shot by .*"))
@@ -125,6 +125,7 @@ regexes_death_message.append(re.compile("was slain by .*"))
 regexes_death_message.append(re.compile("was fireballed by .*"))
 regexes_death_message.append(re.compile("was stung to death"))
 regexes_death_message.append(re.compile("was shot by a skull from .*"))
+regexes_death_message.append(re.compile("was obliterated by a sonically-charged shriek.*"))
 # Starving
 regexes_death_message.append(re.compile("starved to death.*"))
 # Suffocation
