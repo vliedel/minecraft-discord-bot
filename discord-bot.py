@@ -228,6 +228,8 @@ while True:
 		for p in players_online:
 			if match.group(1) == p:
 				split = match.group(2).split(' ', 1)
+				if len(split) < 2:
+					break
 				command = split[0]
 				chat_text = split[1]
 				if command == "@d" or command == "@discord":
