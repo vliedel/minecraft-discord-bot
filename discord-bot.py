@@ -69,7 +69,9 @@ regex_server_start = re.compile("Starting minecraft server version .*")
 regex_server_stop = re.compile("Stopping the server")
 
 # [20:13:54] [Server thread/INFO]: hysterina has made the advancement [Local Brewery]
-regex_achievement = re.compile("has made the advancement .*")
+# [20:13:54] [Server thread/INFO]: hysterina has completed the challenge [Bullseye]
+# [20:13:54] [Server thread/INFO]: hysterina has reached the goal [Hired Help]
+regex_achievement = re.compile("has (made the advancement|completed the challenge|reached the goal) .*")
 
 # [14:28:01] [Server thread/INFO]: <vliedel> hello there
 regex_chat = re.compile("<(.*)> (.*)")
