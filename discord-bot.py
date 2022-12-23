@@ -44,7 +44,7 @@ logging.basicConfig(format=log_format, level=log_level, datefmt=log_date_format)
 
 # [07:54:07] [Server thread/INFO]: 4poc joined the game
 # match.group(1) will be the part after the prefix "[07:54:07] [Server thread/INFO]: "
-regex_log_line = re.compile("\[\d+:\d+:\d+\] \[Server thread.INFO\]: (.+)")
+regex_log_line = re.compile(".*? \[Server thread.INFO\](?: \[net.minecraft.server.MinecraftServer\/\])?: (.+)")
 
 # [07:54:07] [Server thread/INFO]: 4poc joined the game
 # match.group(1) will be the player name
